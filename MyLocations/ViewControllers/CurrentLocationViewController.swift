@@ -59,23 +59,21 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
             locationManager.requestWhenInUseAuthorization()
             return
         }
-        
-        if logoVisible {
-            hideLogoView()
-        }
-        
         if authStatus == .denied || authStatus == .restricted {
             showLocationServicesDeniedAlert()
             return
         }
+        if logoVisible {
+            hideLogoView()
+        }
         
         if updatingLocation {
-            placemark = nil
-            lastGeocodingError = nil
             stopLocationManager()
         } else {
             location = nil
             lastLocationError = nil
+            placemark = nil
+            lastGeocodingError = nil
             startLocationManager()
         }
         updateLabels()
